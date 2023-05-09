@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Array Programs</title>
+</head>
+
+<body background="https://static.vecteezy.com/system/resources/previews/004/968/002/or iginal/cute-abstract-modern-background-free-vector.jpg" background-repeat="no- repeat" background-size="cover"></body>
+<body style="text-align: center;">
+    <h1 style="color: rgba(126, 29, 84, 0.962);"> 
+        Reversing and sorting of an Array
+    </h1>
+    <br>
+
+<script>
+    function reverseArray(array) { const reversedArray = [];
+        for (let i = array.length - 1; i >= 0; i--) { 
+            reversedArray.push(array[i]);
+        }
+        return reversedArray;
+    }
+
+    function mergeSort(array) { if (array.length <= 1) { 
+            return array;
+        }
+        const mid = Math.floor(array.length / 2); const leftArray = array.slice(0, mid); const rightArray = array.slice(mid);
+        return merge(mergeSort(leftArray), mergeSort(rightArray));
+    }
+
+    function merge(leftArray, rightArray) { 
+        const result = [];
+        let leftIndex = 0; let rightIndex = 0;
+        while (leftIndex < leftArray.length && rightIndex < rightArray.length) { 
+            if (leftArray[leftIndex] < rightArray[rightIndex]) {
+                result.push(leftArray[leftIndex]);
+                leftIndex++;
+
+            } 
+            else { 
+                result.push(rightArray[rightIndex]); rightIndex++;
+            }
+        }
+
+        return result.concat(leftArray.slice(leftIndex)).concat(rightArray.slice(rightIndex));
+    }
+
+
+    function bubbleSort(array) { 
+        const length = array.length; for (let i = 0; i < length; i++) {
+            for (let j = 0; j < length - 1; j++) { 
+                if (array[j] > array[j + 1]) { 
+                    const temp = array[j];
+                    array[j] = array[j + 1]; array[j + 1] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+    function binarySearch(array, element) { 
+            let start = 0;
+            let end = array.length - 1; while (start <= end) {
+            const mid = Math.floor((start + end) / 2); if (array[mid] === element) {
+                return mid;
+            } 
+            else if (array[mid] < element) { 
+                start = mid + 1;
+            } 
+            else {
+                end = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    function linearSearch(array, element) { 
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] === element) { 
+                return i;
+            }
+        }
+    return -1;
+    }
+
+    const arrayInput = prompt("Enter array elements separated by commas:"); const array = arrayInput.split(",").map(Number);
+    const reversedArray = reverseArray(array); document.write("Reversed Array:", reversedArray);
+    document.write("<br>");
+    const sortedArray1 = mergeSort(array); document.write("Merge Sort:", sortedArray1); document.write("<br>");
+    const sortedArray2 = bubbleSort(array);
+    document.write("Bubble Sort:", sortedArray2); document.write("<br>");
+    const searchInput = prompt("Enter search element:"); const element = Number(searchInput);
+    const binarySearchResult = binarySearch(sortedArray1, element); const linearSearchResult = linearSearch(array, element); document.write("Binary Search Result:", binarySearchResult); document.write("<br>");
+    document.write("Linear Search Result:", linearSearchResult);
+    
+</script>
